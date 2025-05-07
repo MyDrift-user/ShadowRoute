@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "ShadowRoute",
+  "version": "1.0",
+  "description": "Silently redirects websites to privacy-friendly alternatives with no data leakage",
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "declarative_net_request": {
+    "rule_resources": []
+  }
+} 

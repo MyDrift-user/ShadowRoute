@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ShadowRoute Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      color: #4285f4;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    h2 {
+      color: #333;
+      margin-top: 30px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+    }
+    
+    .redirect-item {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .redirect-content {
+      flex-grow: 1;
+    }
+    
+    .redirect-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      margin-left: 10px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #4285f4;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .redirect-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .redirect-description {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 8px;
+    }
+    
+    .redirect-pattern {
+      font-family: monospace;
+      background: #efefef;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    .redirect-target {
+      font-family: monospace;
+      background: #e8f0fe;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      display: inline-block;
+    }
+    
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+    
+    button:hover {
+      background-color: #3367d6;
+    }
+    
+    button.secondary {
+      background-color: #f44336;
+    }
+    
+    button.secondary:hover {
+      background-color: #d32f2f;
+    }
+    
+    .add-form {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+      display: none;
+    }
+    
+    .form-row {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .status-message {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .success {
+      background-color: #dff0d8;
+      color: #3c763d;
+    }
+    
+    .error {
+      background-color: #f2dede;
+      color: #a94442;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ShadowRoute Settings</h1>
+    
+    <div id="statusMessage" class="status-message"></div>
+    
+    <div class="section">
+      <h2>Default Redirects</h2>
+      <p>These redirects are built-in and can be enabled or disabled.</p>
+      <div id="defaultRedirects"></div>
+    </div>
+    
+    <div class="section">
+      <h2>Custom Redirects</h2>
+      <p>You can add, edit, or remove your own custom redirects.</p>
+      <div id="customRedirects"></div>
+      
+      <button id="showAddForm">Add New Redirect</button>
+      
+      <div id="addForm" class="add-form">
+        <h3>Add New Redirect</h3>
+        
+        <div class="form-row">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="e.g., Custom YouTube">
+        </div>
+        
+        <div class="form-row">
+          <label for="description">Description:</label>
+          <textarea id="description" placeholder="e.g., Redirect YouTube to a custom alternative"></textarea>
+        </div>
+        
+        <div class="form-row">
+          <label for="sourceHost">Source Domain:</label>
+          <input type="text" id="sourceHost" placeholder="e.g., youtube.com">
+        </div>
+        
+        <div class="form-row">
+          <label for="targetHost">Target Domain:</label>
+          <input type="text" id="targetHost" placeholder="e.g., invidio.us">
+        </div>
+        
+        <button id="saveRedirect">Save</button>
+        <button id="cancelAdd" class="secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="options.js" type="module"></script>
+</body>
+</html> 
