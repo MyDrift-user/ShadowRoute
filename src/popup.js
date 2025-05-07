@@ -37,4 +37,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   openOptionsButton.addEventListener('click', () => {
     chrome.runtime.openOptionsPage();
   });
-}); 
+});

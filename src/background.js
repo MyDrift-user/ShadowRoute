@@ -15,11 +15,15 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-function createRedirectRules(redirect, startId) {
+function createRedirectRules(redirect, baseId) {
   const rules = [];
   
+  // Create a unique ID for each rule using the baseId and a suffix
+  const wwwRuleId = baseId * 2;
+  const nonWwwRuleId = baseId * 2 + 1;
+  
   rules.push({
-    id: startId,
+    id: wwwRuleId,
     priority: 1,
     action: {
       type: 'redirect',
@@ -37,7 +41,7 @@ function createRedirectRules(redirect, startId) {
   });
   
   rules.push({
-    id: startId + 1,
+    id: nonWwwRuleId,
     priority: 1,
     action: {
       type: 'redirect',
@@ -63,12 +67,13 @@ async function updateRedirectRules() {
     const redirects = await getAllRedirects();
     const rules = [];
     
-    let ruleId = 1;
+    // Start with a base ID that's high enough to avoid conflicts
+    let baseId = 1000;
     for (const redirect of redirects) {
       if (redirect.enabled) {
-        const redirectRules = createRedirectRules(redirect, ruleId);
+        const redirectRules = createRedirectRules(redirect, baseId);
         rules.push(...redirectRules);
-        ruleId += 2;
+        baseId++;
       }
     }
     
@@ -99,4 +104,4 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     console.log('Redirect settings changed, updating rules');
     updateRedirectRules();
   }
-}); 
+});

@@ -48,10 +48,10 @@ function renderDefaultRedirects() {
     redirectItem.innerHTML = `
       <div class="redirect-content">
         <div class="redirect-name">${redirect.name}</div>
-        <div class="redirect-description">${redirect.description}</div>
+        ${redirect.description ? `<div class="redirect-description">${redirect.description}</div>` : ''}
         <div>
           <span class="redirect-pattern">From: ${redirect.sourceHost}</span>
-          <span class="redirect-target">To: ${redirect.targetHost}</span>
+          <a href="https://${redirect.targetHost}" target="_blank" class="redirect-target">To: ${redirect.targetHost}</a>
         </div>
       </div>
       <div class="redirect-actions">
@@ -87,10 +87,10 @@ function renderCustomRedirects() {
     redirectItem.innerHTML = `
       <div class="redirect-content">
         <div class="redirect-name">${redirect.name}</div>
-        <div class="redirect-description">${redirect.description}</div>
+        ${redirect.description ? `<div class="redirect-description">${redirect.description}</div>` : ''}
         <div>
           <span class="redirect-pattern">From: ${redirect.sourceHost}</span>
-          <span class="redirect-target">To: ${redirect.targetHost}</span>
+          <a href="https://${redirect.targetHost}" target="_blank" class="redirect-target">To: ${redirect.targetHost}</a>
         </div>
       </div>
       <div class="redirect-actions">
@@ -226,4 +226,4 @@ cancelAddButton.addEventListener('click', resetForm);
 
 saveRedirectButton.addEventListener('click', addOrUpdateRedirect);
 
-document.addEventListener('DOMContentLoaded', init); 
+document.addEventListener('DOMContentLoaded', init);

@@ -77,4 +77,4 @@ export {
   getAllRedirects,
   saveDefaultRedirectSettings,
   saveCustomRedirects
-}; 
+};
