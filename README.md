@@ -1,4 +1,7 @@
-# ShadowRoute
+<div align="center">
+  <img src="src/icons/sr.svg" alt="ShadowRoute Logo" width="128" height="128">
+  <h1>ShadowRoute</h1>
+</div>
 
 A lightweight Chrome extension that silently redirects websites to privacy-friendly alternatives before any connection is made to the original site
 
@@ -14,11 +17,13 @@ A lightweight Chrome extension that silently redirects websites to privacy-frien
 
 The extension comes with the following default redirects:
 
-- YouTube → Invidious (yewtu.be)
-- Twitter → Nitter
-- Instagram → Bibliogram
-- Reddit → Teddit
-- Google Search → DuckDuckGo
+| Original Site | Redirects To |
+|--------------|--------------|
+| Google Search | [DuckDuckGo](https://duckduckgo.com) |
+| YouTube | [Invidious](https://yewtu.be) |
+| Twitter | [Nitter](https://nitter.net) |
+| Instagram | [Bibliogram](https://bibliogram.art) |
+| Reddit | [Teddit](https://redlib.catsarch.com) |
 
 ## Installation
 
