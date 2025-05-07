@@ -1,4 +1,3 @@
-// Default redirects configuration
 const DEFAULT_REDIRECTS = [
   {
     id: 'google',
@@ -41,7 +40,6 @@ const DEFAULT_REDIRECTS = [
     targetHost: 'redlib.catsarch.com'
   }
 ];
-
 async function getAllRedirects() {
   return new Promise((resolve) => {
     chrome.storage.sync.get(['customRedirects', 'defaultRedirectSettings'], (result) => {
@@ -59,19 +57,16 @@ async function getAllRedirects() {
     });
   });
 }
-
 async function saveDefaultRedirectSettings(settings) {
   return new Promise((resolve) => {
     chrome.storage.sync.set({ defaultRedirectSettings: settings }, resolve);
   });
 }
-
 async function saveCustomRedirects(redirects) {
   return new Promise((resolve) => {
     chrome.storage.sync.set({ customRedirects: redirects }, resolve);
   });
 }
-
 export {
   DEFAULT_REDIRECTS,
   getAllRedirects,

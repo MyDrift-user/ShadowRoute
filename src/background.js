@@ -1,5 +1,4 @@
 import { getAllRedirects } from './redirects.js';
-
 chrome.runtime.onInstalled.addListener(() => {
   console.log('Privacy Redirect extension installed');
   
@@ -14,11 +13,9 @@ chrome.runtime.onInstalled.addListener(() => {
     updateRedirectRules();
   });
 });
-
 function createRedirectRules(redirect, baseId) {
   const rules = [];
   
-  // Create a unique ID for each rule using the baseId and a suffix
   const wwwRuleId = baseId * 2;
   const nonWwwRuleId = baseId * 2 + 1;
   
@@ -61,13 +58,11 @@ function createRedirectRules(redirect, baseId) {
   
   return rules;
 }
-
 async function updateRedirectRules() {
   try {
     const redirects = await getAllRedirects();
     const rules = [];
     
-    // Start with a base ID that's high enough to avoid conflicts
     let baseId = 1000;
     for (const redirect of redirects) {
       if (redirect.enabled) {
@@ -97,7 +92,6 @@ async function updateRedirectRules() {
     console.error('Error updating redirect rules:', error);
   }
 }
-
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && 
       (changes.customRedirects || changes.defaultRedirectSettings)) {

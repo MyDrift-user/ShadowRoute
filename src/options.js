@@ -4,8 +4,6 @@ import {
   saveDefaultRedirectSettings, 
   saveCustomRedirects 
 } from './redirects.js';
-
-// DOM elements
 const defaultRedirectsContainer = document.getElementById('defaultRedirects');
 const customRedirectsContainer = document.getElementById('customRedirects');
 const addForm = document.getElementById('addForm');
@@ -13,18 +11,13 @@ const showAddFormButton = document.getElementById('showAddForm');
 const saveRedirectButton = document.getElementById('saveRedirect');
 const cancelAddButton = document.getElementById('cancelAdd');
 const statusMessage = document.getElementById('statusMessage');
-
-// Form fields
 const nameInput = document.getElementById('name');
 const descriptionInput = document.getElementById('description');
 const sourceHostInput = document.getElementById('sourceHost');
 const targetHostInput = document.getElementById('targetHost');
-
-// Current state
 let defaultSettings = {};
 let customRedirects = [];
 let editingIndex = -1;
-
 async function init() {
   chrome.storage.sync.get(['defaultRedirectSettings', 'customRedirects'], (result) => {
     defaultSettings = result.defaultRedirectSettings || {};
@@ -34,7 +27,6 @@ async function init() {
     renderCustomRedirects();
   });
 }
-
 function renderDefaultRedirects() {
   defaultRedirectsContainer.innerHTML = '';
   
@@ -62,7 +54,6 @@ function renderDefaultRedirects() {
       </div>
     `;
     
-    // Add event listener for toggle
     const toggleSwitch = redirectItem.querySelector('input[type="checkbox"]');
     toggleSwitch.addEventListener('change', (e) => {
       toggleDefaultRedirect(redirect.id, e.target.checked);
@@ -71,8 +62,6 @@ function renderDefaultRedirects() {
     defaultRedirectsContainer.appendChild(redirectItem);
   });
 }
-
-// Render custom redirects
 function renderCustomRedirects() {
   customRedirectsContainer.innerHTML = '';
   
@@ -103,7 +92,6 @@ function renderCustomRedirects() {
       </div>
     `;
     
-    // Add event listeners
     const toggleSwitch = redirectItem.querySelector('input[type="checkbox"]');
     toggleSwitch.addEventListener('change', (e) => {
       toggleCustomRedirect(index, e.target.checked);
@@ -122,21 +110,18 @@ function renderCustomRedirects() {
     customRedirectsContainer.appendChild(redirectItem);
   });
 }
-
 function toggleDefaultRedirect(id, enabled) {
   defaultSettings[id] = enabled;
   saveDefaultRedirectSettings(defaultSettings).then(() => {
     showStatus('Default redirect updated', 'success');
   });
 }
-
 function toggleCustomRedirect(index, enabled) {
   customRedirects[index].enabled = enabled;
   saveCustomRedirects(customRedirects).then(() => {
     showStatus('Custom redirect updated', 'success');
   });
 }
-
 function deleteCustomRedirect(index) {
   if (confirm('Are you sure you want to delete this redirect?')) {
     customRedirects.splice(index, 1);
@@ -146,8 +131,6 @@ function deleteCustomRedirect(index) {
     });
   }
 }
-
-// Edit custom redirect
 function editCustomRedirect(index) {
   const redirect = customRedirects[index];
   
@@ -161,9 +144,7 @@ function editCustomRedirect(index) {
   addForm.style.display = 'block';
   showAddFormButton.style.display = 'none';
 }
-
 function addOrUpdateRedirect() {
-  // Validate form
   if (!nameInput.value || !sourceHostInput.value || !targetHostInput.value) {
     showStatus('Please fill all required fields', 'error');
     return;
@@ -196,7 +177,6 @@ function addOrUpdateRedirect() {
     }
   });
 }
-
 function resetForm() {
   nameInput.value = '';
   descriptionInput.value = '';
@@ -206,7 +186,6 @@ function resetForm() {
   addForm.style.display = 'none';
   showAddFormButton.style.display = 'block';
 }
-
 function showStatus(message, type) {
   statusMessage.textContent = message;
   statusMessage.className = `status-message ${type}`;
@@ -216,14 +195,10 @@ function showStatus(message, type) {
     statusMessage.style.display = 'none';
   }, 3000);
 }
-
 showAddFormButton.addEventListener('click', () => {
   addForm.style.display = 'block';
   showAddFormButton.style.display = 'none';
 });
-
 cancelAddButton.addEventListener('click', resetForm);
-
 saveRedirectButton.addEventListener('click', addOrUpdateRedirect);
-
 document.addEventListener('DOMContentLoaded', init);

@@ -26,22 +26,70 @@
       margin: 0;
       color: #2d0b42;
     }
-    .status {
+    .redirect-list {
+      margin-bottom: 15px;
+    }
+    .redirect-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background: #fff;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 4px rgba(90, 43, 122, 0.1);
+    }
+    .redirect-name {
+      color: #2d0b42;
+      font-weight: 500;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #f0e6f7;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #5a2b7a;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    .no-redirects {
       padding: 12px;
       margin-bottom: 15px;
       border-radius: 6px;
       background: #fff;
+      color: #2d0b42;
+      text-align: center;
       box-shadow: 0 2px 4px rgba(90, 43, 122, 0.1);
-    }
-    .enabled {
-      color: #2d0b42;
-      background-color: #f0e6f7;
-      border-left: 4px solid #5a2b7a;
-    }
-    .disabled {
-      color: #2d0b42;
-      background-color: #f0e6f7;
-      border-left: 4px solid #2c0e41;
     }
     button {
       background-color: #5a2b7a;
@@ -65,7 +113,10 @@
     <img src="icons/sr.svg" alt="ShadowRoute Logo" class="logo">
     <h1>ShadowRoute</h1>
   </div>
-  <div id="status" class="status">Checking status...</div>
+  <div id="redirectList" class="redirect-list"></div>
+  <div id="noRedirects" class="no-redirects" style="display: none;">
+    No redirects available for this site
+  </div>
   <div>
     <button id="openOptions">Open Settings</button>
   </div>
