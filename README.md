@@ -19,10 +19,8 @@ The extension comes with the following default redirects:
 
 | Original Site | Redirects To |
 |--------------|--------------|
-| Google Search | [DuckDuckGo](https://duckduckgo.com) |
 | YouTube | [Invidious](https://yewtu.be) |
 | Twitter | [Nitter](https://nitter.net) |
-| Instagram | [Bibliogram](https://bibliogram.art) |
 | Reddit | [Teddit](https://redlib.catsarch.com) |
 
 ## Installation

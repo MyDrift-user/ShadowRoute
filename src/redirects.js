@@ -1,13 +1,5 @@
 const DEFAULT_REDIRECTS = [
   {
-    id: 'google',
-    name: 'Google Search',
-    description: 'Redirect Google Search to DuckDuckGo',
-    enabled: true,
-    sourceHost: 'google.com',
-    targetHost: 'duckduckgo.com'
-  },
-  {
     id: 'youtube',
     name: 'YouTube',
     description: 'Redirect YouTube to Invidious (yewtu.be)',
@@ -22,14 +14,6 @@ const DEFAULT_REDIRECTS = [
     enabled: true,
     sourceHost: 'twitter.com',
     targetHost: 'nitter.net'
-  },
-  {
-    id: 'instagram',
-    name: 'Instagram',
-    description: 'Redirect Instagram to Bibliogram',
-    enabled: true,
-    sourceHost: 'instagram.com',
-    targetHost: 'bibliogram.art'
   },
   {
     id: 'reddit',
